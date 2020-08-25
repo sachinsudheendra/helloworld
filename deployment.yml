@@ -1,0 +1,21 @@
+kind: Deployemnt
+apiVersion: apps/v1
+metadata:
+  name: helloworld
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+        - name: helloworld
+          image: localhost:5000/helloworld
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+      restartPolicy: Always
