@@ -1,4 +1,4 @@
-kind: Deployemnt
+kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: helloworld
@@ -19,3 +19,17 @@ spec:
           ports:
             - containerPort: 9090
       restartPolicy: Always
+--
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloworld
+spec:
+  type: NodePort
+  ports:
+    - port: 9090
+      targetPort: 9090
+      protocol: TCP
+      nodePort: 71000
+  selector:
+    app: helloworld
