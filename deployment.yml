@@ -14,12 +14,14 @@ spec:
     spec:
       containers:
         - name: helloworld
-          image: localhost:5000/helloworld
-          imagePullPolicy: Always
+          image: registry:5000/helloworld
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
       restartPolicy: Always
---
+
+---
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -30,6 +32,6 @@ spec:
     - port: 9090
       targetPort: 9090
       protocol: TCP
-      nodePort: 71000
+      nodePort: 30300
   selector:
     app: helloworld
